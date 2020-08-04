@@ -5,12 +5,14 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 		[i].addEventListener("click", function () {
 			var buttonInnerHTML = this.innerHTML;
 			makeSound(buttonInnerHTML);
+			buttonAnimation(buttonInnerHTML);
 		});
 }
 
 // For checking which key was pressed.
 document.addEventListener("keydown", function (event) {
 	makeSound(event.key);
+	buttonAnimation(event.key);
 });
 
 // For making the sound on button press or key press.
@@ -48,4 +50,12 @@ function makeSound(key) {
 			console.log(key);
 			break;
 	}
+}
+
+function buttonAnimation(key) {
+	var activeKey = document.querySelector("." + key);
+	activeKey.classList.add("pressed");
+	setTimeout(function () {
+		activeKey.classList.remove("pressed");
+	}, 100);
 }
